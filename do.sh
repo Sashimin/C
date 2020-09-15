@@ -1,7 +1,19 @@
 #!/bin/bash
 
-gcc $1.c
+file="$1"
+subc="$2"
+subc_i="$3"
+shift
+
+gcc -O3 -lm $file.c
 if [ $? -eq 0 ]; then
-	./a.out
+	case $subc in
+		-i)
+			./a.out < $subc_i
+			;;
+		*)
+			./a.out
+			;;
+	esac
 	rm a.out
 fi
